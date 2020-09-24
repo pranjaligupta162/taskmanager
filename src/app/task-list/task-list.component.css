@@ -21,9 +21,12 @@
   text-align: left;
   color: #000;
 }
+.tskTbl th:nth-child(n+2) {width: 13%;}
+.tskTbl th:nth-child(2){width: 40%}
 .tblP1 th{ background-color: #ff0000ab;}
 .tblP2 th{ background-color: #ffff00a6;}
 .tblP3 th{ background-color: #00800094;}
+
 .taskTblDv{
 	width: 100%;
     float: left;
@@ -49,5 +52,10 @@ td i:before{
   color: grey;
 }
 
-
+@media only screen and (max-width: 1023px){
+  .tskTbl{
+    overflow: scroll;
+    display: block;
+  }
+}
 

@@ -1,5 +1,6 @@
 import { Component, OnInit,ElementRef,Input } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
+// import {FormsModule, FormGroup} from '@angular/forms';
 import {GlobalsService} from '../shared/globals.service';
 import {CreateTaskComponent} from '../create-task/create-task.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +13,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  @Input srchQry:ElementRef;
+  @Input() srchQry:String;
   constructor(private GlobalsService:GlobalsService,private http: HttpClient,public TaskService:TaskService) { }
   ngOnInit(): void {
   	this.TaskService.getTaskList();
@@ -39,22 +40,26 @@ export class TaskListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event.previousContainer,event.container,event);
     if (event.previousContainer === event.container) {
-      console.log('if');
-      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log(event.container.data,event.previousIndex, event.currentIndex);
+      
     } else {
-      console.log('else');
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
-       console.log(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-       console.log(event.container.data[event.currentIndex]);
+       console.log(event.container.data[event.currentIndex],event.container.id);
+       let dta=event.container.data[event.currentIndex];
+       let formData= new FormData;
+       formData.append('taskid',dta['id']);
+       formData.append('priority',event.container.id.split('')[1]);
+        this.http.post(`${this.GlobalsService.apiURL}update`,formData,this.GlobalsService.httpOptions).subscribe(res=>{
+          let response=<any>res;
+          if(response.status=="success"){
+            this.GlobalsService.showSuccess('Task Moved Successfuly');
+          }else{
+            this.GlobalsService.showError(response.error);
+          }
+        });
     }
   }
 

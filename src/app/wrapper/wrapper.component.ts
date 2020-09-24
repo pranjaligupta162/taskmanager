@@ -7,6 +7,7 @@ import {TaskService} from '../create-task/task.service';
 })
 export class WrapperComponent implements OnInit {
   serchQry='';
+  srchString='';
   constructor(public TaskService:TaskService) { 
     
   }

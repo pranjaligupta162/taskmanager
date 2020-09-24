@@ -12,7 +12,7 @@ import {TaskListComponent} from '../task-list/task-list.component';
 
 
 export class TaskService {
-
+	tblMsg="Loading";
 	constructor(private GlobalsService:GlobalsService,private http: HttpClient, private fb: FormBuilder, private dialog:MatDialog) { }
 	tskCreateForm=this.fb.group({
 		"message":['',Validators.required],
@@ -35,11 +35,15 @@ export class TaskService {
 	 	}
 	 	else{
 	  		this.title="Update Task";
-	  		let date = dta.due_date==null?'':new Date(dta.due_date);
-	  		console.log(date,dta);
+	  		let dt:any;
+	  		if(dta.due_date!=null){
+	  			let date = new Date(dta.due_date);
+	  			dt=new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().split('.')[0];
+	  		}else
+	  			dt='';
 	  		this.tskCreateForm.patchValue({
 	  			"message":dta.message,
-				"due_date":date==''?'':new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().split('.')[0],
+				"due_date":dt,
 				"priority":dta.priority,
 				"assigned_to":dta.assigned_to
 	  		})
@@ -51,7 +55,7 @@ export class TaskService {
 	createTask(){
 		console.log(this.taskLstComp);
 	  	let formObj=this.tskCreateForm.value;
-	  	let formData = new FormData();
+	  	let formData = new FormData;
 	  	formData.append('message', formObj.message);
 	  	formData.append('due_date', formObj.due_date.split('T').join(' ')+':00');
 	  	formData.append('priority', formObj.priority);
@@ -92,6 +96,7 @@ export class TaskService {
   			this.p1Task=tskList.filter(function(t){return t.priority==1});
   			this.p2Task=tskList.filter(function(t){return t.priority==2});
   			this.p3Task=tskList.filter(function(t){return t.priority==3});
+  			this.tblMsg="No Task";
   		}
   	})
   }

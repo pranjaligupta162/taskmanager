@@ -1,10 +1,7 @@
 <div cdkDropListGroup>
 	<div class="taskTblDv">
-		<h3>High Priority</h3>
-		<table class="tskTbl tblP1" cdkDropList 
-			#listP1="cdkDropList"
-	      [cdkDropListData]="TaskService.p1Task"
-	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP2]">
+		<h3>High Priority Task</h3>
+		<table class="tskTbl tblP1" >
 			<thead>
 				<th>SN.</th>
 				<th>Message</th>
@@ -13,9 +10,15 @@
 				<th>Assigned To</th>
 				<th>Action</th>
 			</thead>
-			<tbody *ngIf="TaskService.p1Task.length>0">
+			<tbody id="p1" cdkDropList 
+			#listP1="cdkDropList"
+	      [cdkDropListData]="TaskService.p1Task"
+	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP2,listP3]">
+	      		<tr style="text-align: center;" *ngIf="TaskService.p1Task.length==0">
+  					<td colspan="6">{{TaskService.tblMsg}}</td>
+ 				</tr>
 				<ng-container *ngFor="let tsk of TaskService.p1Task; let i=index;">
-					<tr *ngIf="tsk.message.indexOf(srchQry)>-1||srchQry==''" cdkDrag>
+					<tr *ngIf="tsk.message.toLowerCase().indexOf(srchQry.toLowerCase())>-1 || srchQry==''|| (tsk.assigned_name==false?'':tsk.assigned_name.toLowerCase()).indexOf(srchQry.toLowerCase())>-1 || (tsk.due_date==null?'':tsk.due_date).indexOf(srchQry)>-1 " cdkDrag>
 						<td>{{i+1}}</td>
 						<td>{{tsk.message}}</td>
 						<td>{{tsk.created_on}}</td>
@@ -28,10 +31,8 @@
 		</table>
 	</div>
 	<div class="taskTblDv">
-		<h3>Medium Priority</h3>
-		<table class="tskTbl tblP2"   cdkDropList
-	      [cdkDropListData]="TaskService.p2Task" #listP2="cdkDropList"
-	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP1]">
+		<h3>Medium Priority Task</h3>
+		<table class="tskTbl tblP2"  >
 			<thead>
 				<th>SN.</th>
 				<th>Message</th>
@@ -40,9 +41,14 @@
 				<th>Assigned To</th>
 				<th>Action</th>
 			</thead>
-			<tbody *ngIf="TaskService.p2Task.length>0">
+			<tbody id="p2"  cdkDropList
+	      [cdkDropListData]="TaskService.p2Task" #listP2="cdkDropList"
+	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP1,listP3]">
+	      		<tr style="text-align: center;" *ngIf="TaskService.p2Task.length==0">
+  					<td colspan="6">{{TaskService.tblMsg}}</td>
+ 				</tr>
 				<ng-container *ngFor="let tsk of TaskService.p2Task; let i=index;">
-				<tr *ngIf="tsk.message.indexOf(srchQry)>-1||srchQry==''" cdkDrag>
+				<tr *ngIf="tsk.message.toLowerCase().indexOf(srchQry.toLowerCase())>-1 || srchQry=='' || (tsk.assigned_name==false?'':tsk.assigned_name.toLowerCase()).indexOf(srchQry.toLowerCase())>-1 || (tsk.due_date==null?'':tsk.due_date).indexOf(srchQry)>-1 " cdkDrag>
 					<td>{{i+1}}</td>
 					<td>{{tsk.message}}</td>
 					<td>{{tsk.created_on}}</td>
@@ -55,7 +61,7 @@
 		</table>
 	</div>
 	<div class="taskTblDv">
-		<h3>Low Priority</h3>
+		<h3>Low Priority Task</h3>
 		<table class="tskTbl tblP3" >
 			<thead>
 				<th>SN.</th>
@@ -65,9 +71,14 @@
 				<th>Assigned To</th>
 				<th>Action</th>
 			</thead>
-			<tbody *ngIf="TaskService.p3Task.length>0">
+			<tbody id="p3" cdkDropList
+	      [cdkDropListData]="TaskService.p3Task" #listP3="cdkDropList"
+	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP1,listP2]">
+	      		<tr style="text-align: center;" *ngIf="TaskService.p3Task.length==0">
+  					<td colspan="6">{{TaskService.tblMsg}}</td>
+ 				</tr>
 				<ng-container *ngFor="let tsk of TaskService.p3Task; let i=index;">
-				<tr *ngIf="tsk.message.indexOf(srchQry)>-1||srchQry==''">
+				<tr *ngIf="tsk.message.toLowerCase().indexOf(srchQry.toLowerCase())>-1 || srchQry==''|| (tsk.assigned_name==false?'':tsk.assigned_name.toLowerCase()).indexOf(srchQry.toLowerCase())>-1 || (tsk.due_date==null?'':tsk.due_date).indexOf(srchQry)>-1 " cdkDrag>
 					<td>{{i+1}}</td>
 					<td>{{tsk.message}}</td>
 					<td>{{tsk.created_on}}</td>
