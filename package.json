@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:heroku": "node dist/taskmanager/index.html",
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
