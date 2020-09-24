@@ -1,0 +1,18 @@
+.inner-container{
+	width: 80%;
+	margin: 20px auto;
+	    overflow: auto;
+    padding-bottom: 50px;
+}
+.taskBar{padding: 20px 0px;}
+.taskBar>div{width: 50%;float: left;position: relative;}
+
+.taskBarDv1 i{
+	position: absolute;
+    top: 8px;
+    right: 5px;
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+} 
+.taskBarDv2{text-align: right;}

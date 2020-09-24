@@ -1,0 +1,12 @@
+header{
+	height: 50px;
+    text-align: center;
+    background: #047afbab;
+    color: #fff;
+    font-size: 24px;
+    line-height: 45px;
+    padding: 0px 15px;
+}
+.hdrLft{width: 50%;float: left;text-align: left;}
+.hdrRgt{width: 50%;float: right;text-align: right;}
+.wlcmTxt{font-size: 16px;padding: 0px 15px;}

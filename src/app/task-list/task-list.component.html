@@ -1,0 +1,82 @@
+<div cdkDropListGroup>
+	<div class="taskTblDv">
+		<h3>High Priority</h3>
+		<table class="tskTbl tblP1" cdkDropList 
+			#listP1="cdkDropList"
+	      [cdkDropListData]="TaskService.p1Task"
+	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP2]">
+			<thead>
+				<th>SN.</th>
+				<th>Message</th>
+				<th>Created Date</th>
+				<th>Due Date</th>
+				<th>Assigned To</th>
+				<th>Action</th>
+			</thead>
+			<tbody *ngIf="TaskService.p1Task.length>0">
+				<ng-container *ngFor="let tsk of TaskService.p1Task; let i=index;">
+					<tr *ngIf="tsk.message.indexOf(srchQry)>-1||srchQry==''" cdkDrag>
+						<td>{{i+1}}</td>
+						<td>{{tsk.message}}</td>
+						<td>{{tsk.created_on}}</td>
+						<td>{{tsk.due_date}}</td>
+						<td>{{tsk.assigned_name==false?'':tsk.assigned_name}}</td>
+						<td><i class="fa fa-pencil" (click)="TaskService.openTskModl(tsk)"></i><i class="fa fa-trash" (click)="dltTask(tsk.id)"></i></td>
+					</tr>
+				</ng-container>
+			</tbody>
+		</table>
+	</div>
+	<div class="taskTblDv">
+		<h3>Medium Priority</h3>
+		<table class="tskTbl tblP2"   cdkDropList
+	      [cdkDropListData]="TaskService.p2Task" #listP2="cdkDropList"
+	      (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="[listP1]">
+			<thead>
+				<th>SN.</th>
+				<th>Message</th>
+				<th>Created Date</th>
+				<th>Due Date</th>
+				<th>Assigned To</th>
+				<th>Action</th>
+			</thead>
+			<tbody *ngIf="TaskService.p2Task.length>0">
+				<ng-container *ngFor="let tsk of TaskService.p2Task; let i=index;">
+				<tr *ngIf="tsk.message.indexOf(srchQry)>-1||srchQry==''" cdkDrag>
+					<td>{{i+1}}</td>
+					<td>{{tsk.message}}</td>
+					<td>{{tsk.created_on}}</td>
+					<td>{{tsk.due_date}}</td>
+					<td>{{tsk.assigned_name==false?'':tsk.assigned_name}}</td>
+					<td><i class="fa fa-pencil" (click)="TaskService.openTskModl(tsk)"></i><i class="fa fa-trash" (click)="dltTask(tsk.id)"></i></td>
+				</tr>
+				</ng-container>
+			</tbody>
+		</table>
+	</div>
+	<div class="taskTblDv">
+		<h3>Low Priority</h3>
+		<table class="tskTbl tblP3" >
+			<thead>
+				<th>SN.</th>
+				<th>Message</th>
+				<th>Created Date</th>
+				<th>Due Date</th>
+				<th>Assigned To</th>
+				<th>Action</th>
+			</thead>
+			<tbody *ngIf="TaskService.p3Task.length>0">
+				<ng-container *ngFor="let tsk of TaskService.p3Task; let i=index;">
+				<tr *ngIf="tsk.message.indexOf(srchQry)>-1||srchQry==''">
+					<td>{{i+1}}</td>
+					<td>{{tsk.message}}</td>
+					<td>{{tsk.created_on}}</td>
+					<td>{{tsk.due_date}}</td>
+					<td>{{tsk.assigned_name==false?'':tsk.assigned_name}}</td>
+					<td><i class="fa fa-pencil" (click)="TaskService.openTskModl(tsk)"></i><i class="fa fa-trash" (click)="dltTask(tsk.id)"></i></td>
+				</tr>
+			</ng-container>
+			</tbody>
+		</table>
+	</div>
+</div>

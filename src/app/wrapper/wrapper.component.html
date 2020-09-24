@@ -1,0 +1,20 @@
+<div class="contanier">
+	<app-header></app-header>
+	<div class="inner-container">
+		<div class="taskBar">
+			<div class="taskBarDv1">
+				<mat-form-field >
+					<input matInput type="text" [(ngModel)]="srchString" (keyup)="search(srchString)"  placeholder="Search Here..">
+				</mat-form-field>
+				<i class="fa fa-search" (click)="search(srchString)"></i>
+			</div>
+			<div class="taskBarDv2">
+				<button class="btn btn-primary" (click)="TaskService.openTskModl('C')">Create Task</button>	
+			</div>
+			
+		</div>
+		<app-task-list [srchQry]="serchQry"></app-task-list>
+	</div>
+	<app-footer></app-footer>
+	
+</div>

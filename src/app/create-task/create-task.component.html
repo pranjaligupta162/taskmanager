@@ -1,0 +1,36 @@
+<div class="taskFormDv">
+	<h2>{{TaskService.title}}</h2>
+	<form [formGroup]="TaskService.tskCreateForm" (ngSubmit)="TaskService.createTask()">
+		<div class="inputDv">
+			 <mat-form-field >
+				<input matInput type="text" formControlName="message" placeholder="Enter Message" required>
+			</mat-form-field>
+		</div>
+		<div class="inputDv">
+			 <mat-form-field >
+				<input matInput type="datetime-local"  formControlName="due_date" placeholder="Select Due Date">
+			</mat-form-field>
+		</div>
+		<div class="selDv">
+			<mat-form-field >
+	 			 <mat-select placeholder="Select Priority" formControlName="priority">
+					<mat-option value="3">Low</mat-option>
+					<mat-option value="2">Medium</mat-option>
+					<mat-option value="1">High</mat-option>
+	           </mat-select>
+	 		</mat-form-field>
+		</div>
+		<div class="selDv">
+			<mat-form-field >
+	 			 <mat-select placeholder="Select Assignee" formControlName="assigned_to">
+					<mat-option value={{usr.id}} *ngFor="let usr of userList">{{usr.name}}</mat-option>
+	           </mat-select>
+	 		</mat-form-field>
+		</div>
+		<div class="btnDv">
+			<button mat-raised-button color="" type="submit" class="btn btn-primary">Submit</button>
+			<button mat-raised-button  type="button" class="ml-2 btn btn-secondary" (click)="TaskService.tskCreateForm.reset()" value="discard">Reset</button>
+		</div>
+
+	</form>
+</div>
